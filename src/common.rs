@@ -13,9 +13,8 @@ pub(crate) fn setup_json_watcher(path: PathBuf) {
         None => StorageLocation::Internal,
     };
     let mut path = get_storage_path(current_location);
+    path.extend(["games", "com.mojang", "minecraftpe"]);
     log::info!("location = {current_location:#?}");
-    get_storage_path(StorageLocation::External);
-    path.extend(["Android", "data", "com.mojang.minecraftpe"]);
 
     let mut data_manager = DataManager::init_data(&path);
     let (sender, reciever) = crossbeam_channel::unbounded();
@@ -81,4 +80,4 @@ fn setup_watches(watcher: &mut impl Watcher, path: &Path, files: &[&str]) {
         }
         watcher.watch(&path, RecursiveMode::NonRecursive).unwrap();
     }
-}
+            }
