@@ -13,12 +13,9 @@ pub(crate) fn setup_json_watcher(path: PathBuf) {
         None => StorageLocation::Internal,
     };
     let mut path = get_storage_path(current_location);
-    path.extend(["Android", "data", "com.mojang.minecraftpe"]);
     log::info!("location = {current_location:#?}");
-    if !path.join("valid_known_packs.json").exists() {
-        get_storage_path(StorageLocation::External);
-        path.extend(["Android", "data", "com.mojang.minecraftpe"]);
-    }
+    get_storage_path(StorageLocation::External);
+    path.extend(["Android", "data", "com.mojang.minecraftpe"]);
 
     let mut data_manager = DataManager::init_data(&path);
     let (sender, reciever) = crossbeam_channel::unbounded();
