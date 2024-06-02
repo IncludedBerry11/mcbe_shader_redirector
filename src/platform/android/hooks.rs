@@ -34,7 +34,7 @@ pub(crate) unsafe fn asset_open(
     let aasset = unsafe { ndk_sys::AAssetManager_open(man, fname, mode) };
     let c_str = unsafe { CStr::from_ptr(fname) };
     let raw_cstr = c_str.to_bytes();
-    if !raw_cstr.ends_with(".material.bin") {
+    if !raw_cstr.ends_with(b".material.bin") {
         return aasset;
     }
     let os_str = OsStr::from_bytes(raw_cstr);
