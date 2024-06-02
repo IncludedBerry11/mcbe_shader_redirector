@@ -13,12 +13,10 @@ pub(crate) fn setup_json_watcher(path: PathBuf) {
         None => StorageLocation::Internal,
     };
     let mut path = get_storage_path(current_location);
-    path.extend(["games", "com.mojang", "minecraftpe"]);
+    path.extend(["Android", "data", "com.mojang.minecraftpe"]);
     log::info!("location = {current_location:#?}");
     if !path.join("valid_known_packs.json").exists() {
-        log::warn!("Options storage invalid, cowardly defaulting to internal");
-        path = get_storage_path(StorageLocation::Internal);
-        path.extend(["games", "com.mojang", "minecraftpe"]);
+        path.extend(["Android", "data", "com.mojang.minecraftpe"]);
     }
 
     let mut data_manager = DataManager::init_data(&path);
